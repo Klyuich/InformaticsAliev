@@ -2,6 +2,7 @@ package edu.spbu.cs;
 
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,12 +36,16 @@ public class IntSortTest
   @Test
   public void testSortArray() throws Exception {
     int array[] = generateRandomIntArray(ARRAY_SIZE, SEED);
-
+	int[] array2 = generateRandomIntArray(ARRAY_SIZE, SEED);
     //сортируем массив и замеряем время работы
     long startTime = System.nanoTime();
     IntSort.sort(array);
     long estimatedTime = System.nanoTime() - startTime;
-    System.out.println("Execution time(ms) " + (estimatedTime/ 1000000));
+    System.out.println("Execution time(ms) of my sort " + (estimatedTime/ 1000000));
+    startTime = System.nanoTime();
+    Arrays.sort(array2);
+    estimatedTime = System.nanoTime() - startTime;
+    System.out.println("Execution time(ms) of Arrays.sort " + (estimatedTime/ 1000000));
 
     // проверяем правильность сортировки
     int previousValue = Integer.MIN_VALUE;
@@ -54,16 +59,23 @@ public class IntSortTest
   public void testSortList() throws Exception {
     int array[] = generateRandomIntArray(ARRAY_SIZE, SEED);
     List<Integer> list = new ArrayList<Integer>(ARRAY_SIZE);
+    List<Integer> list2=new ArrayList<Integer>(ARRAY_SIZE);
     for (int i: array) {
       list.add(Integer.valueOf(i));
+      list2.add(Integer.valueOf(i));
     }
 
     //сортируем массив и замеряем время работы
     long startTime = System.nanoTime();
     IntSort.sort(list);
     long estimatedTime = System.nanoTime() - startTime;
-    System.out.println("Execution time(ms) " + (estimatedTime/ 1000000));
+    System.out.println("Execution time(ms) of my sort " + (estimatedTime/ 1000000));
 
+
+    startTime = System.nanoTime();
+    Collections.sort(list2);
+    estimatedTime = System.nanoTime() - startTime;
+    System.out.println("Execution time(ms) of Collections.sort " + (estimatedTime/ 1000000));
     // проверяем правильность сортировки
     int previousValue = Integer.MIN_VALUE;
     for (int i = 0; i < list.size() ; i++) {
