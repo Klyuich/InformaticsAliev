@@ -1,4 +1,4 @@
-
+package edu.spbu.cs;
 
 
 public final class DenseMatrix extends Matrix {
@@ -63,7 +63,8 @@ public final class DenseMatrix extends Matrix {
 	@Override
 	public Matrix slice(int hstart, int hoffset, int wstart, int woffset) {
 		// TODO Auto-generated method stub
-		return new DenseMatrix(elements,wstart,hstart,wstart+woffset,hstart+hoffset);
+		if(wstart<0 || hstart<0 || woffset>width || hoffset>height) throw new IndexOutOfBoundsException("Incorrect slice!");
+		return new DenseMatrix(elements,left+wstart,up+hstart,left+wstart+woffset,up+hstart+hoffset);
 	}
 	public Vector toVector(){
 		if(width!=1) throw new IllegalArgumentException("This matrix is not a vector!");
@@ -72,29 +73,6 @@ public final class DenseMatrix extends Matrix {
 		return new DenseVector(elem,height,up);
 	}
 	public Matrix simpleMultiplicate(Matrix B){
-		int n=height,m=width,l=B.getWidth();
-		double[][] elem=new double[n][l];
-		for(int i=0;i<n;i++)
-			for(int j=0;j<l;j++)
-				for(int k=0;k<m;k++)
-					elem[i][j]+=this.get(i, k)* B.get(k, j);
-					
-		return new DenseMatrix(elem,n,l);
-	}
-	
-	public Matrix transpose(){
-		
-		double[][] elem=new double[width][height];
-		for(int i=0;i<width;i++)
-			for(int j=0;j<height;j++)
-				elem[i][j]=this.get(j, i);
-		return new DenseMatrix(elem,up,left,down,right);
-		
-	}
-	@Override
-	public Matrix multiplicate(Matrix B) {
-		// TODO Auto-generated method stub
-
 		int n=height,m=width,l=B.getWidth();
 		if(m!=B.getHeight()) throw new
 		IllegalArgumentException("You can't multiply these two matrices!");
@@ -106,14 +84,36 @@ public final class DenseMatrix extends Matrix {
 					elem[i][j]+=this.get(i, k)* C.get(j, k);
 					
 		return new DenseMatrix(elem,n,l);
-		//too dumb to do it right
-		/*
-		int small=8;
-
+	}
+	
+	public Matrix transpose(){
 		
-		int n=this.getHeight(),m=this.getWidth(),l=B.getWidth();
+		double[][] elem=new double[width][height];
+		for(int i=0;i<width;i++)
+			for(int j=0;j<height;j++)
+				elem[i][j]=this.get(j, i);
+		return new DenseMatrix(elem,width,height);
+		
+	}
+	@Override
+	public Matrix multiplicate(Matrix B) {
+		// TODO Auto-generated method stub
+
+		int n=height,m=width,l=B.getWidth();
 		if(m!=B.getHeight()) throw new
-			IllegalArgumentException("You can't multiply these two matrices!");
+		IllegalArgumentException("You can't multiply these two matrices!");
+		/*Matrix C=B.transpose();
+		double[][] elem=new double[n][l];
+		for(int i=0;i<n;i++)
+			for(int j=0;j<l;j++)
+				for(int k=0;k<m;k++)
+					elem[i][j]+=this.get(i, k)* C.get(j, k);
+					
+		return new DenseMatrix(elem,n,l);*/
+		//too dumb to do it right
+
+		int small=32;
+
 		
 		if(l<=small && m<=small && n<=small){
 			if(l>0 && m>0 && n>0) return this.simpleMultiplicate(B);	
@@ -146,9 +146,11 @@ public final class DenseMatrix extends Matrix {
 				elem[i][j]=c[i1][j1].get(i-i1*n1, j-j1*l1);
 			}
 				
-		return new DenseMatrix(elem,n,l);*/
+		return new DenseMatrix(elem,n,l);
 	}
 
 	
 
+
+	
 }
