@@ -1,0 +1,29 @@
+package edu.spbu.cs;
+
+public class EdgeRealization implements Edge {
+	Vertex from,to;
+	double weight;
+	public EdgeRealization(Vertex from,Vertex to,double weight){
+		this.from=from;
+		this.to=to;
+		this.weight=weight;
+	}
+	@Override
+	public Vertex from() {
+		// TODO Auto-generated method stub
+		return this.from;
+	}
+
+	@Override
+	public Vertex to() {
+		// TODO Auto-generated method stub
+		return this.to;
+	}
+
+	@Override
+	public double getWeight() {
+		// TODO Auto-generated method stub
+		return weight;
+	}
+
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.spbu.cs.mainTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2015-10-31T19:47:31" hostname="daniel-Aspire-5552G" time="3.068">
+  <properties/>
+  <testcase name="main" classname="edu.spbu.cs.mainTest" time="3.068"/>
+  <system-out><![CDATA[Execution time of counting page rank with graphs: 14.030344
+Execution time of counting page rank with matrices: 2893.190985
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

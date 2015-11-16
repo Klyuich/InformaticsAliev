@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.spbu.cs.mainTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2015-10-24T19:24:32" hostname="daniel-Aspire-5552G" time="21.227">
+  <properties/>
+  <testcase name="main" classname="edu.spbu.cs.mainTest" time="21.227"/>
+  <system-out><![CDATA[Execution time of simple+transpose matrix multiplication: 4618.813217
+Execution time of divide by two matrix multiplication: 12482.242232
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
