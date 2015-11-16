@@ -10,7 +10,6 @@ public class ErrorClass {
 		Thread myThread[]=new Thread[N];
 		for(int i=0;i<N;i++) myThread[i]=new Thread(err[i]);
 		for(int i=0;i<N;i++) myThread[i].start();
-		for(int i=0;i<N;i++) myThread[i].join();
 		System.out.println(n.geta());
 	}
 }
