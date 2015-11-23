@@ -1,0 +1,49 @@
+package edu.spbu.cs;
+
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+public class mainTest {
+
+
+	@Test
+	public void main() {
+		// TODO Auto-generated method stub
+		int height=1600,width=700;
+		DenseMatrixCreator creator=new DenseMatrixCreator();
+		DenseMatrix A=creator.RandomDenseMatrix(height, width);
+		Matrix B=creator.randomDenseMatrix(width,height);
+		long startTime,estimatedTime;
+	
+		startTime=System.nanoTime();
+			public Matrix simpleMultiplicateWithThreads(Matrix B) throws InterruptedException{
+		final int n=height;
+		final int m=width, l=B.getWidth();
+		if(m!=B.getHeight()) throw new
+		IllegalArgumentException("You can't multiply these two matrices!");
+		final Matrix C=B.transpose();
+		final Matrix D=this;
+		final double[][] elem=new double[n][l];
+		final int N=6;
+		Thread myThread[]=new Thread[N];
+		for(int Thr=0;Thr<N;Thr++){
+			final int T=Thr;
+			myThread[Thr]=new Thread(new Runnable()
+			{
+				
+				public void run(){
+				for(int i=(T*n)/N;i<(T*n+n)/N;i++)
+					for(int j=0;j<l;j++)
+						for(int k=0;k<m;k++)
+					elem[i][j]+=D.get(i, k)* C.get(j, k);
+				}
+			});
+		}		
+		for(int i=0;i<N;i++) myThread[i].start();
+		for(int i=0;i<N;i++) myThread[i].join();
+		return new DenseMatrix(elem,n,l);
+	
+		
+	}
+
+}
